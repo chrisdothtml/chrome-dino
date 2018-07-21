@@ -1,17 +1,18 @@
 import 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js'
 
-function preload () {
-  //
-}
+const { p5: P5 } = window
 
-function setup () {
-  createCanvas(600, 150)
-}
+// eslint-disable-next-line no-new
+new P5(p5 => {
+  p5.preload = () => {
+    //
+  }
 
-function draw () {
-  //
-}
+  p5.setup = () => {
+    p5.createCanvas(600, 150)
+  }
 
-// necessary for using p5 from esmodule
-Object.assign(window, { draw, preload, setup })
-new window.p5()
+  p5.draw = () => {
+    //
+  }
+})
