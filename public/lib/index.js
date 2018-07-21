@@ -9,11 +9,13 @@ new P5(p5 => {
 
   p5.preload = () => {
     const imageNames = [
+      'bird-sprite',
       'cactus-double',
       'cactus-single',
       'cactus-triple',
       'cloud',
-      'dino-sprite'
+      'dino-sprite',
+      'restart-icon'
     ]
 
     imageNames.forEach(name => {
