@@ -1,9 +1,14 @@
 {
   "private": true,
   "scripts": {
+    "lint": "standard --verbose | snazzy",
     "start": "serve public"
   },
   "dependencies": {
     "serve": "^9.3.0"
+  },
+  "devDependencies": {
+    "snazzy": "^7.1.1",
+    "standard": "^11.0.1"
   }
 }
