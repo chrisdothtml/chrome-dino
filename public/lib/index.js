@@ -19,11 +19,13 @@ new P5(p5 => {
     gameOver: false,
     groundX: 0,
     groundY: 0,
-    isRunning: false
+    isRunning: false,
+    level: 0,
+    score: 0
   }
   window.state = STATE
   // eslint-disable-next-line no-unused-vars
-  let sprite
+  let PressStartFont, sprite
 
   function spriteImage (spriteName, ...clientCoords) {
     const img = config.sprites[spriteName]
@@ -46,17 +48,24 @@ new P5(p5 => {
       dino: new Dino(),
       gameOver: false,
       groundX: 0,
-      isRunning: true
+      isRunning: true,
+      level: 0,
+      score: 0
     })
 
     p5.loop()
   }
 
   function endGame () {
-    const padding = 20
+    const padding = 15
 
-    spriteImage('gameOver', s => [ (p5.width / 2 - s.width / 2), (p5.height / 2 - s.height / 2 - padding) ])
+    p5.fill('#535353')
+    p5.textAlign(p5.CENTER)
+    p5.textFont(PressStartFont)
+    p5.textSize(12)
+    p5.text('G A M E  O V E R', (p5.width / 2), (p5.height / 2 - p5.textSize() / 2 - padding))
     spriteImage('replayIcon', s => [ (p5.width / 2 - s.width / 2), (p5.height / 2 - s.height / 2 + padding) ])
+
     STATE.isRunning = false
     p5.noLoop()
   }
@@ -153,9 +162,18 @@ new P5(p5 => {
     }
   }
 
+  function drawScore () {
+    p5.fill('#535353')
+    p5.textAlign(p5.RIGHT)
+    p5.textFont(PressStartFont)
+    p5.textSize(12)
+    p5.text((STATE.score + '').padStart(5, '0'), p5.width, p5.textSize())
+  }
+
   // triggered on pageload
   p5.preload = () => {
     sprite = p5.loadImage('asset-sprite.png')
+    PressStartFont = p5.loadFont('PressStart2P-Regular.ttf')
   }
 
   // triggered after preload
@@ -172,9 +190,15 @@ new P5(p5 => {
     drawClouds()
     drawDino()
     drawCacti()
+    drawScore()
 
     if (STATE.gameOver) {
       endGame()
+    } else {
+      if (p5.frameCount % 5 === 0) {
+        STATE.score++
+        STATE.level = Math.floor(STATE.score / 100)
+      }
     }
   }
 
