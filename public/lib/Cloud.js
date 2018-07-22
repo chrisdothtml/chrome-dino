@@ -1,6 +1,6 @@
 import config from './config.js'
 
-export default class cloud {
+export default class Cloud {
   constructor (x, y, speedMod) {
     this.speedMod = speedMod
     this.x = x

@@ -3,7 +3,6 @@ import Cloud from './Cloud.js'
 import Dino from './Dino.js'
 import 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js'
 
-const BG_SPEED = 5
 const { p5: P5 } = window
 
 // eslint-disable-next-line no-new
@@ -38,10 +37,14 @@ new P5(p5 => {
   }
 
   function resetGame () {
-    STATE.gameOver = false
-    STATE.isRunning = true
-    STATE.groundX = 0
-    STATE.dino = new Dino()
+    Object.assign(STATE, {
+      clouds: [],
+      dino: new Dino(),
+      gameOver: false,
+      groundX: 0,
+      isRunning: true
+    })
+
     p5.loop()
   }
 
@@ -58,7 +61,7 @@ new P5(p5 => {
     const groundImgWidth = config.sprites.ground.w / 2
 
     spriteImage('ground', s => [ STATE.groundX, STATE.groundY ])
-    STATE.groundX -= BG_SPEED
+    STATE.groundX -= config.settings.bgSpeed
 
     // append second image until first is fully translated
     if (STATE.groundX <= -groundImgWidth + p5.width) {
