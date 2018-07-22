@@ -1,14 +1,17 @@
 import config from './config.js'
+import Cactus from './Cactus.js'
 import Cloud from './Cloud.js'
 import Dino from './Dino.js'
 import 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js'
 
 const { p5: P5 } = window
+window.config = config
 
 // eslint-disable-next-line no-new
 new P5(p5 => {
   window.p5 = p5
   const STATE = {
+    cacti: [],
     clouds: [],
     dino: null,
     dinoLeg: 'Left',
@@ -38,6 +41,7 @@ new P5(p5 => {
 
   function resetGame () {
     Object.assign(STATE, {
+      cacti: [],
       clouds: [],
       dino: new Dino(),
       gameOver: false,
@@ -124,6 +128,31 @@ new P5(p5 => {
     }
   }
 
+  function drawCacti () {
+    const { cacti } = STATE
+
+    for (let i = cacti.length - 1; i >= 0; i--) {
+      const cactus = cacti[i]
+
+      cactus.nextFrame()
+
+      if (cactus.x <= -config.sprites.cactus.w / 2) {
+        cacti.splice(i, 1)
+      } else {
+        spriteImage('cactus', cactus.x, cactus.y)
+      }
+    }
+
+    if (p5.frameCount % config.settings.cactiSpawnRate === 0) {
+      // randomly either do or don't add cactus
+      if (Math.round(p5.random(0, 1))) {
+        cacti.push(
+          new Cactus(p5.width, (p5.height - (config.sprites.cactus.h / 2) - 2))
+        )
+      }
+    }
+  }
+
   // triggered on pageload
   p5.preload = () => {
     sprite = p5.loadImage('asset-sprite.png')
@@ -142,6 +171,7 @@ new P5(p5 => {
     drawGround()
     drawClouds()
     drawDino()
+    drawCacti()
 
     if (STATE.gameOver) {
       endGame()
