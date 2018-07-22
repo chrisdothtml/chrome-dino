@@ -44,7 +44,6 @@ new P5(p5 => {
   function resetGame () {
     Object.assign(STATE, {
       cacti: [],
-      clouds: [],
       dino: new Dino(),
       gameOver: false,
       groundX: 0,
