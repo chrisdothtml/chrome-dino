@@ -58,17 +58,18 @@ new P5(p5 => {
   }
 
   function drawGround () {
+    const { bgSpeed } = config.settings
     const groundImgWidth = config.sprites.ground.w / 2
 
     spriteImage('ground', s => [ STATE.groundX, STATE.groundY ])
-    STATE.groundX -= config.settings.bgSpeed
+    STATE.groundX -= bgSpeed
 
     // append second image until first is fully translated
     if (STATE.groundX <= -groundImgWidth + p5.width) {
       spriteImage('ground', s => [ (STATE.groundX + groundImgWidth), STATE.groundY ])
 
       if (STATE.groundX <= -groundImgWidth) {
-        STATE.groundX = 0
+        STATE.groundX = -bgSpeed
       }
     }
   }
