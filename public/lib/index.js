@@ -1,4 +1,5 @@
 import config from './config.js'
+import Cloud from './Cloud.js'
 import Dino from './Dino.js'
 import 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js'
 
@@ -9,6 +10,7 @@ const { p5: P5 } = window
 new P5(p5 => {
   window.p5 = p5
   const STATE = {
+    clouds: [],
     dino: null,
     dinoLeg: 'Left',
     dinoLegFrames: 0,
@@ -68,6 +70,28 @@ new P5(p5 => {
     }
   }
 
+  function drawClouds () {
+    const { clouds } = STATE
+
+    for (let i = clouds.length - 1; i >= 0; i--) {
+      const cloud = clouds[i]
+
+      cloud.nextFrame()
+
+      if (cloud.x <= -config.sprites.cloud.w / 2) {
+        clouds.splice(i, 1)
+      } else {
+        spriteImage('cloud', cloud.x, cloud.y)
+      }
+    }
+
+    if (p5.frameCount % 200 === 0) {
+      clouds.push(
+        new Cloud(p5.width, p5.random(20, 80), p5.random(0.6, 1.4))
+      )
+    }
+  }
+
   function drawDino () {
     const { dino } = STATE
 
@@ -112,7 +136,7 @@ new P5(p5 => {
   p5.draw = () => {
     p5.background('#f7f7f7')
     drawGround()
-    spriteImage('cloud', 350, 50)
+    drawClouds()
     drawDino()
 
     if (STATE.gameOver) {

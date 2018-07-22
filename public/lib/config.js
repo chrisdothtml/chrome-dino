@@ -1,5 +1,7 @@
 export default {
+  // units are pixels per frame
   settings: {
+    cloudSpeed: 2,
     dinoGravity: 0.6,
     dinoLift: 10
   },
