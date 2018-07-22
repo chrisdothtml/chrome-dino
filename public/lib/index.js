@@ -7,6 +7,7 @@ const { p5: P5 } = window
 // eslint-disable-next-line no-new
 new P5(p5 => {
   const STATE = {
+    gameOver: false,
     groundX: 0,
     groundY: 0
   }
@@ -58,8 +59,12 @@ new P5(p5 => {
     spriteImage('dino', s => [ 25, (p5.height - s.height - 4) ])
     spriteImage('cloud', 350, 50)
 
-    // TODO: show when game over
-    // spriteImage('gameOver', s => [ (p5.width / 2 - s.width / 2), (p5.height / 2 - s.height / 2 - 20) ])
-    // spriteImage('replayIcon', s => [ (p5.width / 2 - s.width / 2), (p5.height / 2 - s.height / 2 + 20) ])
+    if (STATE.gameOver) {
+      const padding = 20
+
+      spriteImage('gameOver', s => [ (p5.width / 2 - s.width / 2), (p5.height / 2 - s.height / 2 - padding) ])
+      spriteImage('replayIcon', s => [ (p5.width / 2 - s.width / 2), (p5.height / 2 - s.height / 2 + padding) ])
+      p5.noLoop()
+    }
   }
 })
