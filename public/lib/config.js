@@ -1,4 +1,8 @@
 export default {
+  settings: {
+    dinoGravity: 0.6,
+    dinoLift: 10
+  },
   sprites: {
     birdUp: { h: 52, w: 84, x: 626, y: 27 },
     birdDown: { h: 60, w: 84, x: 626, y: 79 },
