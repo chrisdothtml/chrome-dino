@@ -172,8 +172,8 @@ new P5(p5 => {
 
   // triggered on pageload
   p5.preload = () => {
-    sprite = p5.loadImage('asset-sprite.png')
-    PressStartFont = p5.loadFont('PressStart2P-Regular.ttf')
+    PressStartFont = p5.loadFont('assets/PressStart2P-Regular.ttf')
+    sprite = p5.loadImage('assets/sprite.png')
   }
 
   // triggered after preload
