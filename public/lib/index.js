@@ -205,6 +205,10 @@ new P5(p5 => {
     p5.text((STATE.score + '').padStart(5, '0'), p5.width, p5.textSize())
   }
 
+  function drawBirds () {
+    // TODO
+  }
+
   // triggered on pageload
   p5.preload = () => {
     PressStartFont = p5.loadFont('assets/PressStart2P-Regular.ttf')
@@ -226,6 +230,12 @@ new P5(p5 => {
     drawDino()
     drawCacti()
     drawScore()
+
+    if (STATE.level > 3) {
+      drawBirds()
+    }
+
+    // TODO: hit detection
 
     if (STATE.gameOver) {
       endGame()
