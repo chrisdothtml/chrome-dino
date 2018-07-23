@@ -6,12 +6,12 @@ export default {
    */
   settings: {
     bgSpeed: 5, // ppf
-    cactiSpawnRate: 80, // fpa
+    cactiSpawnRate: 50, // fpa
     cloudSpeed: 2, // ppf
     dinoGravity: 0.6, // ppf
     dinoLegsRate: 6, // fpa
     dinoLift: 10, // ppf
-    scoreIncreaseRate: 5 // fpa
+    scoreIncreaseRate: 6 // fpa
   },
   sprites: {
     birdUp: { h: 52, w: 84, x: 708, y: 31 },

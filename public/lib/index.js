@@ -84,14 +84,15 @@ new P5(p5 => {
       if (STATE.level !== oldLevel) {
         const { settings } = config
         const { bgSpeed, cactiSpawnRate, dinoLegsRate } = settings
+        const { level } = STATE
 
-        if (STATE.level < 4) {
+        if (level > 4 && level < 8) {
           settings.bgSpeed++
-        } else {
+        } else if (level > 7) {
           settings.bgSpeed = Math.ceil(bgSpeed * 1.1)
           settings.cactiSpawnRate = Math.floor(cactiSpawnRate * 0.98)
 
-          if (STATE.level > 7 && STATE.level % 2 === 0 && dinoLegsRate > 2) {
+          if (level > 7 && level % 2 === 0 && dinoLegsRate > 3) {
             settings.dinoLegsRate--
           }
         }
