@@ -120,13 +120,18 @@ new P5(p5 => {
         // in the air stiff
         dinoSprite = 'dino'
       } else {
+        // on the ground running
         if (STATE.dinoLegFrames >= 6) {
           STATE.dinoLeg = STATE.dinoLeg === 'Left' ? 'Right' : 'Left'
           STATE.dinoLegFrames = 0
         }
 
-        // on the ground running
-        dinoSprite = `dino${STATE.dinoLeg}Leg`
+        if (dino.isDucking) {
+          dinoSprite = `dinoDuck${STATE.dinoLeg}Leg`
+        } else {
+          dinoSprite = `dino${STATE.dinoLeg}Leg`
+        }
+
         STATE.dinoLegFrames++
       }
 
@@ -210,6 +215,16 @@ new P5(p5 => {
       } else {
         resetGame()
       }
+    } else if (p5.keyCode === p5.DOWN_ARROW) {
+      if (STATE.isRunning) {
+        STATE.dino.duck(true)
+      }
+    }
+  }
+
+  p5.keyReleased = () => {
+    if (p5.keyCode === p5.DOWN_ARROW) {
+      STATE.dino.duck(false)
     }
   }
 })
