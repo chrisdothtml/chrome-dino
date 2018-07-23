@@ -1,6 +1,6 @@
-import config from './config.js'
 import Cactus from './Cactus.js'
 import Cloud from './Cloud.js'
+import config from './config.js'
 import Dino from './Dino.js'
 import 'https://cdnjs.cloudflare.com/ajax/libs/p5.js/0.6.1/p5.min.js'
 
@@ -160,7 +160,7 @@ new P5(p5 => {
       // randomly either do or don't add cactus
       if (Math.round(p5.random(0, 1))) {
         cacti.push(
-          new Cactus(p5.width, (p5.height - (config.sprites.cactus.h / 2) - 2))
+          new Cactus(p5.width, (p5.height - config.sprites.cactus.h / 2 - 2))
         )
       }
     }
