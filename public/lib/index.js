@@ -10,6 +10,9 @@ window.config = config
 // eslint-disable-next-line no-new
 new P5(p5 => {
   window.p5 = p5
+  // for resetting settings that change due to
+  // difficulty increasing
+  const SETTINGS_BACKUP = { ...config.settings }
   const STATE = {
     cacti: [],
     clouds: [],
@@ -52,6 +55,7 @@ new P5(p5 => {
       score: 0
     })
 
+    Object.assign(config.settings, SETTINGS_BACKUP)
     p5.loop()
   }
 
@@ -67,6 +71,32 @@ new P5(p5 => {
 
     STATE.isRunning = false
     p5.noLoop()
+  }
+
+  function updateScore () {
+    if (p5.frameCount % config.settings.scoreIncreaseRate === 0) {
+      const oldLevel = STATE.level
+
+      STATE.score++
+      STATE.level = Math.floor(STATE.score / 100)
+
+      // increase difficulty
+      if (STATE.level !== oldLevel) {
+        const { settings } = config
+        const { bgSpeed, cactiSpawnRate, dinoLegsRate } = settings
+
+        if (STATE.level < 4) {
+          settings.bgSpeed++
+        } else {
+          settings.bgSpeed = Math.ceil(bgSpeed * 1.1)
+          settings.cactiSpawnRate = Math.floor(cactiSpawnRate * 0.98)
+
+          if (STATE.level > 7 && STATE.level % 2 === 0 && dinoLegsRate > 2) {
+            settings.dinoLegsRate--
+          }
+        }
+      }
+    }
   }
 
   function drawGround () {
@@ -121,7 +151,7 @@ new P5(p5 => {
         dinoSprite = 'dino'
       } else {
         // on the ground running
-        if (STATE.dinoLegFrames >= 6) {
+        if (STATE.dinoLegFrames >= config.settings.dinoLegsRate) {
           STATE.dinoLeg = STATE.dinoLeg === 'Left' ? 'Right' : 'Left'
           STATE.dinoLegFrames = 0
         }
@@ -199,10 +229,7 @@ new P5(p5 => {
     if (STATE.gameOver) {
       endGame()
     } else {
-      if (p5.frameCount % 5 === 0) {
-        STATE.score++
-        STATE.level = Math.floor(STATE.score / 100)
-      }
+      updateScore()
     }
   }
 

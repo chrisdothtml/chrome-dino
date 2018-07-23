@@ -2,14 +2,16 @@ export default {
   /*
    * units
    * ppf: pixels per frame
-   * fps: frames per spawn
+   * fpa: frames per action
    */
   settings: {
     bgSpeed: 5, // ppf
-    cactiSpawnRate: 80, // fps
+    cactiSpawnRate: 80, // fpa
     cloudSpeed: 2, // ppf
     dinoGravity: 0.6, // ppf
-    dinoLift: 10 // ppf
+    dinoLegsRate: 6, // fpa
+    dinoLift: 10, // ppf
+    scoreIncreaseRate: 5 // fpa
   },
   sprites: {
     birdUp: { h: 52, w: 84, x: 708, y: 31 },
