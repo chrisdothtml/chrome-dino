@@ -2,7 +2,7 @@
 
 > Remaking the chrome offline dinosaur game in p5.js
 
-## Run (literally)
+## Run locally (literally)
 
 ```bash
 # install deps

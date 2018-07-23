@@ -2,7 +2,7 @@
   "private": true,
   "scripts": {
     "lint": "standard --verbose | snazzy",
-    "start": "serve public"
+    "start": "serve"
   },
   "dependencies": {
     "serve": "^9.3.0"
