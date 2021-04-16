@@ -1,14 +1,18 @@
 {
   "private": true,
   "scripts": {
-    "lint": "standard --verbose | snazzy",
+    "lint": "eslint lib",
     "start": "serve"
   },
   "dependencies": {
     "serve": "^9.3.0"
   },
   "devDependencies": {
-    "snazzy": "^7.1.1",
-    "standard": "^11.0.1"
+    "@chrisdothtml/eslint-config": "^0.2.0",
+    "eslint": "^7.24.0"
+  },
+  "volta": {
+    "node": "14.16.1",
+    "yarn": "1.22.5"
   }
 }
