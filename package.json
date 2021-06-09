@@ -9,7 +9,7 @@
   },
   "devDependencies": {
     "@chrisdothtml/eslint-config": "^0.2.0",
-    "eslint": "^7.24.0"
+    "eslint": "^6.0.0"
   },
   "volta": {
     "node": "14.16.1",
