@@ -5,7 +5,7 @@
     "start": "serve"
   },
   "dependencies": {
-    "serve": "^9.3.0"
+    "serve": "^12.0.0"
   },
   "devDependencies": {
     "@chrisdothtml/eslint-config": "^0.2.0",
