@@ -1,16 +1,16 @@
 {
   "private": true,
   "scripts": {
-    "lint": "eslint lib",
+    "lint": "prettier --check .",
+    "lint-fix": "prettier --write .",
     "start": "reload"
   },
   "devDependencies": {
-    "@chrisdothtml/eslint-config": "^0.2.0",
-    "eslint": "^6.0.0",
+    "prettier": "^2.6.2",
     "reload": "^3.2.0"
   },
   "volta": {
-    "node": "14.16.1",
-    "yarn": "1.22.5"
+    "node": "16.15.0",
+    "yarn": "1.22.18"
   }
 }
