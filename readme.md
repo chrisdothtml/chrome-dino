@@ -11,6 +11,8 @@ Note that this was previously written with p5.js but has since been refactored i
 
 ## Run locally (literally)
 
+I use [volta](https://volta.sh/) to automatically install/switch my node and yarn versions. Either install volta, or check the versions I'm using via the [package.json](package.json) `volta` field.
+
 ```bash
 # install deps
 $ yarn
